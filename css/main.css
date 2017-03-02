@@ -34,6 +34,9 @@
 pre {
     text-align: left;
 }
+code {
+    text-align: left;
+}
 
 body {
     background-color: #fff;
