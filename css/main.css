@@ -19,6 +19,12 @@
     padding-left:8em;
     padding-right:8em;
 }
+#h4new {
+    background-color: gray;
+    color:white;
+    padding-left:8em;
+    padding-right:8em;
+}
 .whatisanapi {
     padding-left:8em;
     padding-right:8em;
@@ -35,6 +41,9 @@ pre {
     text-align: left;
 }
 code {
+    text-align: left;
+}
+ul {
     text-align: left;
 }
 

@@ -21,7 +21,6 @@
 		<!-- CSS
 		================================================== -->
 		
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 		
 		<!-- Fontawesome Icon font -->
         <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -110,7 +109,8 @@
                                 <h2 class="animated fadeInDown" id="mainTitle">Pet Finder API - How to guide</h2>
                             <!--<span class="animated fadeInDown"></span>-->
                                 <h3 id="h3new">Welcome to this How-to Guide</h3>
-                                <h3 id="h3new">In this guide I will show you how to get started using the Pet Finder API to pull information from their site into your own. This guide is geared towards a beginner since I actually learned about APIs as I created this assignment.</h3>
+                                <h3 id="h3new">In this guide I will show you how to get started using the Pet Finder API to pull information from their site into your own. This guide is geared towards a beginner since I actually learned about APIs as I created this assignment.<br></h3>
+                                <h4 id="h4new">This guide is meant to be interactive and allow the user to send the requests directly from this site, but due to some browsers restrictions the request may not be sent even after the Submit button is pressed. One way to fix it is to download the files and run the site from your local network or click on the link to view a sample result in a picture format</h4>
                                 <!-- 
                                 <a href="#" class="btn btn-blue btn-effect">Join US</a>
                                 -->
@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', submitbutton);
   }
 							</code></pre>
 							</p>
-							<p class="newPs">The result back is the raw JSON string/object, but the code provided will turn it into a list which will make it look better. In the next examples I’ll show you a function I created to make the result back more easily readable.<br><br>Press the Submit button to test it </p>
+							<p class="newPs">The result back is the raw JSON string/object, but the code provided will turn it into a list which will make it look better. In the next examples I’ll show you a function I created to make the result back more easily readable.<br><a href="img/portfolio/Example1.jpg" target="_blank">Press here to see a picture of the results when I ran it.</a><br><br>Press the Submit button to test it </p>
 							<input type="submit" id="PetFinderSubmitButton">
 							<br><br>
 							<div id="API_response">Result of API request of Dog Breed List:</div>
@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', submitbutton);
 							</code></pre>
 							</p>
 
-							<p class="newPs">The result back is the raw JSON string/object, but the code provided will turn it into a list which will make it look better.<br><br>Press the Submit button to test it </p>
+							<p class="newPs">The result back is the raw JSON string/object, but the code provided will turn it into a list which will make it look better.<br><a href="img/portfolio/Example2.jpg" target="_blank">Press here to see a picture of the results when I ran it.</a><br><br>Press the Submit button to test it </p>
 							<input type="submit" id="PetFinderSubmitButton2">
 							<br><br>
 							<div id="API_response2">Result of API request for a Random Pet with selected parameters:</div>
@@ -344,25 +344,19 @@ document.addEventListener('DOMContentLoaded', submitbutton);
 							<br>
 
 							<p class="newPs"> The only 2 parameters that are required are the key and the location in form of a zip or city and state. In this example we'll be searching for all the "Dogs", whose breed is "Pug", the sex is "Male" and are located around "98012" zip code and we only want to get a maximum of 3 results ("count=3" in the URL). And since we want to use JSON, we need to add the format and callback parameters. <br><br>Copy the following code and follow along with us.<br><br></p>
-							<p class="newPs"> In your html file all you need is a button and a "div" element to display the response. You can use this line of code <pre>&lt;input type="submit" id="PetFinderSubmitButton3"&gt;<br>&lt;div id="API_response3"&gt;All returned searches:&lt;/div&gt;</pre> </p>
+							<p class="newPs"> In your html file all you need is a button and a "ul" element to display the response. You can use this line of code. Notice that we are now using "ul" instead of a div element. <pre>&lt;input type="submit" id="PetFinderSubmitButton3"&gt;<br>&lt;ul id="API_response3 class="sample"&gt;All returned searches:&lt;/ul&gt;</pre> </p>
 
 							<p class="newPs"> In your javascript file enter this code: 
 							<pre ALIGN=LEFT><code>
-document.addEventListener('DOMContentLoaded', submitbutton);
-  function submitbutton(){
+document.addEventListener('DOMContentLoaded', submitbutton3);
+  function submitbutton3(){
     document.getElementById('PetFinderSubmitButton3').addEventListener('click', function(event) {
         displayAPIResponse3 = document.getElementById('API_response3');
-        displayAPIResponse3.innerHTML = "";
-
-          $.getJSON('http://api.petfinder.com/<b style="color:blue;">pet.getfind</b>?<b style="color:green;">key=dcad1eb2f400f451c1fc3b5e4332174d</b>&<b style="color:red;">animal=dog</b>&<b style="color:gray;">breed=pug</b>&<b style="color:blue;">sex=M</b>&<b style="color:black;">location=98012</b>&<b style="color:red;">count=3</b>&<b style="color:purple;">format=json</b>&<b style="color:orange;">output=full</b>&<b style="color:green;">callback=?</b>', function(RandomResult) {
-            var RandomResult1 = RandomResult["petfinder"]["pet"];
-                for (var key in RandomResult1) {
-                if (RandomResult1.hasOwnProperty(key)) {
-                var newElement = document.createElement('div');
-                newElement.innerHTML = key + ": " + JSON.stringify(RandomResult1[key]["$t"]);
-                displayAPIResponse2.appendChild(newElement);
-                }
-            }
+        displayAPIResponse3.innerHTML = "Response Back:";
+          $.getJSON('http://api.petfinder.com/<b style="color:blue;">pet.getfind</b>?<b style="color:green;">key=dcad1eb2f400f451c1fc3b5e4332174d</b>&<b style="color:red;">animal=dog</b>&<b style="color:gray;">breed=pug</b>&<b style="color:blue;">sex=M</b>&<b style="color:black;">location=98012</b>&<b style="color:red;">count=3</b>&<b style="color:purple;">format=json</b>&<b style="color:orange;">output=full</b>&<b style="color:green;">callback=?</b>', function(Result) {
+		  var Result1 = Result["petfinder"]["pets"];
+          body = "";
+          scan(Result1, $('.sample'));
           });
         event.preventDefault();
       }
@@ -371,10 +365,11 @@ document.addEventListener('DOMContentLoaded', submitbutton);
 							</code></pre>
 							</p>
 
-							<p class="newPs">The result back is the raw JSON string/object, but the code provided will turn it into a list which will make it look better.<br><br>Press the Submit button to test it </p>
+							<p class="newPs">The result back is the raw JSON string/object, but the code provided will turn it into a list which will make it look better.<br><a href="img/portfolio/Example3.jpg" target="_blank">Press here to see a picture of the results when I ran it.</a><br><br>Press the Submit button to test it </p>
 							<input type="submit" id="PetFinderSubmitButton3">
 							<br><br>
-							<div id="API_response3">Result of API request for searching Pet with selected parameters within a specified zipcode:</div>
+							<ul id="API_response3" class="sample">Result of API request for searching Pet with selected parameters within a specified zipcode:</ul>
+							
 							<br><br>
 							
 							
@@ -387,25 +382,19 @@ document.addEventListener('DOMContentLoaded', submitbutton);
 							<br>
 
 							<p class="newPs"> The only 2 parameters that are required are the key and the location in form of a zip or city and state. And as usual since we want to use JSON, we need to add the format and callback parameters. <br><br>Copy the following code and follow along with us.<br><br></p>
-							<p class="newPs"> In your html file all you need is a button and a "div" element to display the response. You can use this line of code <pre>&lt;input type="submit" id="PetFinderSubmitButton4"&gt;<br>&lt;div id="API_response4"&gt;All returned searches for Shelters:&lt;/div&gt;</pre> </p>
+							<p class="newPs"> In your html file all you need is a button and a "div" element to display the response. You can use this line of code <pre>&lt;input type="submit" id="PetFinderSubmitButton4"&gt;<br>&lt;ul id="API_response4"&gt;All returned searches for Shelters:&lt;/ul&gt;</pre> </p>
 
 							<p class="newPs"> In your javascript file enter this code: 
 							<pre ALIGN=LEFT><code>
-document.addEventListener('DOMContentLoaded', submitbutton);
-  function submitbutton(){
+document.addEventListener('DOMContentLoaded', submitbutton4);
+  function submitbutton4(){
     document.getElementById('PetFinderSubmitButton4').addEventListener('click', function(event) {
         displayAPIResponse4 = document.getElementById('API_response4');
-        displayAPIResponse4.innerHTML = "";
-
-          $.getJSON('http://api.petfinder.com/<b style="color:blue;">shelter.find</b>?<b style="color:green;">key=dcad1eb2f400f451c1fc3b5e4332174d</b>&<b style="color:red;">location=98012</b>&<b style="color:gray;">count=3</b>&<b style="color:purple;">format=json</b>&<b style="color:green;">callback=?</b>', function(RandomResult) {
-            var RandomResult1 = RandomResult["petfinder"]["pet"];
-                for (var key in RandomResult1) {
-                if (RandomResult1.hasOwnProperty(key)) {
-                var newElement = document.createElement('div');
-                newElement.innerHTML = key + ": " + JSON.stringify(RandomResult1[key]["$t"]);
-                displayAPIResponse2.appendChild(newElement);
-                }
-            }
+        displayAPIResponse4.innerHTML = "Response Back:";
+          $.getJSON('http://api.petfinder.com/<b style="color:blue;">shelter.find</b>?<b style="color:green;">key=dcad1eb2f400f451c1fc3b5e4332174d</b>&<b style="color:red;">location=98012</b>&<b style="color:gray;">count=3</b>&<b style="color:purple;">format=json</b>&<b style="color:green;">callback=?</b>', function(Result) {
+          var Result1 = Result["petfinder"]["shelters"];
+          body = "";
+          scan(Result1, $('.sample4'));
           });
         event.preventDefault();
       }
@@ -414,10 +403,10 @@ document.addEventListener('DOMContentLoaded', submitbutton);
 							</code></pre>
 							</p>
 
-							<p class="newPs">The result back is the raw JSON string/object, but the code provided will turn it into a list which will make it look better.<br><br>Press the Submit button to test it </p>
+							<p class="newPs">The result back is the raw JSON string/object, but the code provided will turn it into a list which will make it look better.<br><a href="img/portfolio/Example4.jpg" target="_blank">Press here to see a picture of the results when I ran it.</a><br><br>Press the Submit button to test it </p>
 							<input type="submit" id="PetFinderSubmitButton4">
 							<br><br>
-							<div id="API_response4">Result of API request for searching Shelters with selected parameters within a specified zipcode:</div>
+							<ul id="API_response4" class="sample4">Result of API request for searching Shelters with selected parameters within a specified zipcode:</ul>
 							<br><br>
 							
 							
@@ -431,26 +420,20 @@ document.addEventListener('DOMContentLoaded', submitbutton);
 							<center><img src="img/portfolio/shelter_get.jpg" atl="petFind picture" width=60% ></center>
 							<br>
 
-							<p class="newPs"> The only 2 parameters that are required are the key and the location in form of a zip or city and state. And as usual since we want to use JSON, we need to add the format and callback parameters. <br><br>Copy the following code and follow along with us.<br><br></p>
+							<p class="newPs"> The documentation says that a token is required for this method but this is in fact a typo and I have sent an email to see if they can fix it. The only 2 parameters that are required are the key and the location in form of a zip or city and state. And as usual since we want to use JSON, we need to add the format and callback parameters. <br><br>Copy the following code and follow along with us.<br><br></p>
 							<p class="newPs"> In your html file all you need is a button and a "div" element to display the response. You can use this line of code <pre>&lt;input type="submit" id="PetFinderSubmitButton5"&gt;<br>&lt;div id="API_response5"&gt;All returned searches for Shelters:&lt;/div&gt;</pre> </p>
 
 							<p class="newPs"> In your javascript file enter this code: 
 							<pre ALIGN=LEFT><code>
-document.addEventListener('DOMContentLoaded', submitbutton);
-  function submitbutton(){
+document.addEventListener('DOMContentLoaded', submitbutton5);
+  function submitbutton5(){
     document.getElementById('PetFinderSubmitButton5').addEventListener('click', function(event) {
         displayAPIResponse5 = document.getElementById('API_response5');
-        displayAPIResponse5.innerHTML = "";
-
-          $.getJSON('http://api.petfinder.com/<b style="color:blue;">shelter.get</b>?<b style="color:green;">key=dcad1eb2f400f451c1fc3b5e4332174d</b>&<b style="color:red;">id=NJ94</b>&<b style="color:purple;">format=json</b>&<b style="color:green;">callback=?</b>', function(RandomResult) {
-            var RandomResult1 = RandomResult["petfinder"]["pet"];
-                for (var key in RandomResult1) {
-                if (RandomResult1.hasOwnProperty(key)) {
-                var newElement = document.createElement('div');
-                newElement.innerHTML = key + ": " + JSON.stringify(RandomResult1[key]["$t"]);
-                displayAPIResponse2.appendChild(newElement);
-                }
-            }
+        displayAPIResponse5.innerHTML = "Response Back:";
+          $.getJSON('http://api.petfinder.com/<b style="color:blue;">shelter.get</b>?<b style="color:green;">key=dcad1eb2f400f451c1fc3b5e4332174d</b>&<b style="color:red;">id=NJ94</b>&<b style="color:purple;">format=json</b>&<b style="color:green;">callback=?</b>', function(Result) {
+          var Result1 = Result["petfinder"]["shelter"];
+          body = "";
+          scan(Result1, $('.sample5'));
           });
         event.preventDefault();
       }
@@ -459,17 +442,17 @@ document.addEventListener('DOMContentLoaded', submitbutton);
 							</code></pre>
 							</p>
 
-							<p class="newPs">The result back is the raw JSON string/object, but the code provided will turn it into a list which will make it look better.<br><br>Press the Submit button to test it </p>
+							<p class="newPs">The result back is the raw JSON string/object, but the code provided will turn it into a list which will make it look better.<br><a href="img/portfolio/Example5.jpg" target="_blank">Press here to see a picture of the results when I ran it.</a><br><br>Press the Submit button to test it </p>
 							<input type="submit" id="PetFinderSubmitButton5">
 							<br><br>
-							<div id="API_response5">Result of API request for searching Shelters with selected parameters within a specified zipcode:</div>
+							<ul id="API_response5" class="sample5">Result of API request for searching Shelters with selected parameters within a specified zipcode:</ul>
 							<br><br>
 							
 							
 							
 							
 							<h1>Example 6 - shelter.getPets</h1>
-							<p class="newPs"> The next method is very useful for somebody looking to adopt a pet from a specific shelter. This method will return a list of IDs of pet records for a specific shelter. So lets say you want to know which pets are available for adoption are your nearest shelter you just have to input shelter ID and the status as “A” for Adoptable and it will return all the animals in that shelter that are waiting to be adopted. You can also pick to give you a ID of the pet or the full description and that can be specified using the output parameter as “full”.</p>
+							<p class="newPs"> The next method is very useful for somebody looking to adopt a pet from a specific shelter. This method will return a list of IDs of pet records for a specific shelter. So lets say you want to know which pets are available for adoption are your nearest shelter you just have to input shelter ID and the status as “A” for Adoptable and it will return all the animals in that shelter that are waiting to be adopted. You can also pick to give you a ID of the pet or the full description and that can be specified using the output parameter as “full”. In this example we will set the parameter count=3 to restrict the results to only 3, we dont want to get a pollute the entire page with results.</p>
 							<br>
 							<center><img src="img/portfolio/shelter_getPets.jpg" atl="petFind picture" width=60% ></center>
 							<br>
@@ -479,21 +462,15 @@ document.addEventListener('DOMContentLoaded', submitbutton);
 
 							<p class="newPs"> In your javascript file enter this code: 
 							<pre ALIGN=LEFT><code>
-document.addEventListener('DOMContentLoaded', submitbutton);
-  function submitbutton(){
+document.addEventListener('DOMContentLoaded', submitbutton6);
+  function submitbutton6(){
     document.getElementById('PetFinderSubmitButton6').addEventListener('click', function(event) {
         displayAPIResponse6 = document.getElementById('API_response6');
-        displayAPIResponse6.innerHTML = "";
-
-          $.getJSON('http://api.petfinder.com/<b style="color:blue;">shelter.getPets</b>?<b style="color:green;">key=dcad1eb2f400f451c1fc3b5e4332174d</b>&<b style="color:red;">id=NJ94</b>&<b style="color:gray;">status=A</b>&<b style="color:purple;">format=json</b>&<b style="color:orange;">output=full</b>&<b style="color:green;">callback=?</b>', function(RandomResult) {
-            var RandomResult1 = RandomResult["petfinder"]["pet"];
-                for (var key in RandomResult1) {
-                if (RandomResult1.hasOwnProperty(key)) {
-                var newElement = document.createElement('div');
-                newElement.innerHTML = key + ": " + JSON.stringify(RandomResult1[key]["$t"]);
-                displayAPIResponse2.appendChild(newElement);
-                }
-            }
+        displayAPIResponse6.innerHTML = "Response Back:";
+          $.getJSON('http://api.petfinder.com/<b style="color:blue;">shelter.getPets</b>?<b style="color:green;">key=dcad1eb2f400f451c1fc3b5e4332174d</b>&<b style="color:red;">id=NJ94</b>&<b style="color:gray;">status=A</b>&<b style="color:blue;">count=3</b><b style="color:purple;">format=json</b>&<b style="color:orange;">output=full</b>&<b style="color:green;">callback=?</b>', function(Result) {
+          var Result1 = Result["petfinder"]["pets"];
+          body = "";
+          scan(Result1, $('.sample6'));
           });
         event.preventDefault();
       }
@@ -502,10 +479,10 @@ document.addEventListener('DOMContentLoaded', submitbutton);
 							</code></pre>
 							</p>
 
-							<p class="newPs">The result back is the raw JSON string/object, but the code provided will turn it into a list which will make it look better.<br><br>Press the Submit button to test it </p>
-							<input type="submit" id="PetFinderSubmitButton5">
+							<p class="newPs">The result back is the raw JSON string/object, but the code provided will turn it into a list which will make it look better.<br><a href="img/portfolio/Example6.jpg" target="_blank">Press here to see a picture of the results when I ran it.</a><br><br>Press the Submit button to test it </p>
+							<input type="submit" id="PetFinderSubmitButton6">
 							<br><br>
-							<div id="API_response6">Result of API request for searching Shelters with selected parameters within a specified zipcode:</div>
+							<ul id="API_response6" class="sample6">Result of API request for searching Shelters with selected parameters within a specified zipcode:</ul>
 							<br><br>
 						</div>
 						
@@ -591,7 +568,6 @@ document.addEventListener('DOMContentLoaded', submitbutton);
 		<!-- jquery.fancybox.pack -->
         <script src="js/jquery.fancybox.pack.js"></script>
 		<!-- Google Map API -->
-		<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		<!-- Owl Carousel -->
         <script src="js/owl.carousel.min.js"></script>
         <!-- jquery easing -->
