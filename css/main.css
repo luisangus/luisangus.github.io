@@ -31,7 +31,9 @@
     padding-left:3em;
     padding-right:3em;
 }
-
+pre {
+    text-align: left;
+}
 
 body {
     background-color: #fff;
