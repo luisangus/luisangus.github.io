@@ -302,30 +302,7 @@ document.addEventListener('DOMContentLoaded', submitbutton);
 							<p class="newPs"> The first thing that is required as usual is the “key” and everything else is optional. In this example we'll be getting information regarding a random "Dog", whose breed is "Pug" and we want a "Full" description on the pet. And since we want to use JSON, we need to add the format and callback parameters. <br><br>Copy the following code and follow along with us.<br><br></p>
 							<p class="newPs"> In your html file all you need is a button and a "div" element to display the response. You can use this line of code <pre>&lt;input type="submit" id="PetFinderSubmitButton2"&gt;<br>&lt;div id="API_response2"&gt;Information about a random dog:&lt;/div&gt;</pre> </p>
 
-							<p class="newPs"> In your javascript file enter this code. We introduce a new function for making the response into "list elements", this is to make the response more readable. We'll be using this function for Examples 3, 4, 5 and 6, please add it to those examples as well. 
-							<pre ALIGN=LEFT><code>
-var body;
-function scan(obj, $target)
-{
-	var k;
-        for (k in obj){
-            if (obj.hasOwnProperty(k)){
-                if (JSON.stringify(obj[k]["$t"]) != undefined) {
-                    var li = $('&lt;ul&gt;').appendTo($target); 
-                    li.text(k + ": ");
-                    var innerList = $('&lt;ul&gt;').appendTo(li);
-                    innerList.text(JSON.stringify(obj[k]["$t"]))
-                } else {
-                    var li = $('&lt;ul&gt;').appendTo($target);
-                    li.text(k);
-                    scan(obj[k], li);
-                }
-            } else {
-                alert(k);
-            }
-        }
-    return body;
-};
+							<p class="newPs"> In your javascript file enter this code.<pre ALIGN=LEFT><code>
 document.addEventListener('DOMContentLoaded', submitbutton);
   function submitbutton(){
     document.getElementById('PetFinderSubmitButton2').addEventListener('click', function(event) {
@@ -368,8 +345,30 @@ document.addEventListener('DOMContentLoaded', submitbutton);
 							<p class="newPs"> The only 2 parameters that are required are the key and the location in form of a zip or city and state. In this example we'll be searching for all the "Dogs", whose breed is "Pug", the sex is "Male" and are located around "98012" zip code and we only want to get a maximum of 3 results ("count=3" in the URL). And since we want to use JSON, we need to add the format and callback parameters. <br><br>Copy the following code and follow along with us.<br><br></p>
 							<p class="newPs"> In your html file all you need is a button and a "ul" element to display the response. You can use this line of code. Notice that we are now using "ul" instead of a div element. <pre>&lt;input type="submit" id="PetFinderSubmitButton3"&gt;<br>&lt;ul id="API_response3 class="sample"&gt;All returned searches:&lt;/ul&gt;</pre> </p>
 
-							<p class="newPs"> In your javascript file enter this code: 
+							<p class="newPs"> In your javascript file enter this code. We introduce a new function for making the response into "list elements", this is to make the response more readable. We'll be using this function for Examples 3, 4, 5 and 6, please add it to those examples as well.  
 							<pre ALIGN=LEFT><code>
+var body;
+function scan(obj, $target)
+{
+	var k;
+        for (k in obj){
+            if (obj.hasOwnProperty(k)){
+                if (JSON.stringify(obj[k]["$t"]) != undefined) {
+                    var li = $('&lt;ul&gt;').appendTo($target); 
+                    li.text(k + ": ");
+                    var innerList = $('&lt;ul&gt;').appendTo(li);
+                    innerList.text(JSON.stringify(obj[k]["$t"]))
+                } else {
+                    var li = $('&lt;ul&gt;').appendTo($target);
+                    li.text(k);
+                    scan(obj[k], li);
+                }
+            } else {
+                alert(k);
+            }
+        }
+    return body;
+};
 document.addEventListener('DOMContentLoaded', submitbutton3);
   function submitbutton3(){
     document.getElementById('PetFinderSubmitButton3').addEventListener('click', function(event) {
