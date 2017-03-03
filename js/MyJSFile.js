@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', submitbutton3);
   function submitbutton3(){
     document.getElementById('PetFinderSubmitButton3').addEventListener('click', function(event) {
         displayAPIResponse3 = document.getElementById('API_response3');
-        displayAPIResponse3.innerHTML = "Response Back:";
+        displayAPIResponse3.innerHTML = "";
           $.getJSON('http://api.petfinder.com/pet.find?key=dcad1eb2f400f451c1fc3b5e4332174d&animal=dog&breed=pug&sex=M&location=98012&count=3&format=json&output=full&callback=?', function(Result) {
           var Result1 = Result["petfinder"]["pets"];
           body = "";
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', submitbutton4);
   function submitbutton4(){
     document.getElementById('PetFinderSubmitButton4').addEventListener('click', function(event) {
         displayAPIResponse4 = document.getElementById('API_response4');
-        displayAPIResponse4.innerHTML = "Response Back:";
+        displayAPIResponse4.innerHTML = "";
           $.getJSON('http://api.petfinder.com/shelter.find?key=dcad1eb2f400f451c1fc3b5e4332174d&location=98012&count=3&format=json&callback=?', function(Result) {
           var Result1 = Result["petfinder"]["shelters"];
           body = "";
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', submitbutton5);
   function submitbutton5(){
     document.getElementById('PetFinderSubmitButton5').addEventListener('click', function(event) {
         displayAPIResponse5 = document.getElementById('API_response5');
-        displayAPIResponse5.innerHTML = "Response Back:";
+        displayAPIResponse5.innerHTML = "";
           $.getJSON('http://api.petfinder.com/shelter.get?key=dcad1eb2f400f451c1fc3b5e4332174d&id=WA422&format=json&callback=?', function(Result) {
           var Result1 = Result["petfinder"]["shelter"];
           body = "";
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', submitbutton6);
   function submitbutton6(){
     document.getElementById('PetFinderSubmitButton6').addEventListener('click', function(event) {
         displayAPIResponse6 = document.getElementById('API_response6');
-        displayAPIResponse6.innerHTML = "Response Back:";
+        displayAPIResponse6.innerHTML = "";
           $.getJSON('http://api.petfinder.com/shelter.getPets?key=dcad1eb2f400f451c1fc3b5e4332174d&id=WA59&status=A&count=3&format=json&callback=?', function(Result) {
           var Result1 = Result["petfinder"]["pets"];
           body = "";
